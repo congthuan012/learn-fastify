@@ -1,0 +1,116 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cars {
+  id                       Int       @id @default(autoincrement())
+  name                     String?
+  region_id                Int?
+  category_id              Int?
+  model_name               String?
+  model_year               Int?
+  body_type_id             Int?
+  running                  Int?
+  mission_id               Int?
+  drive_system             Int?
+  price                    Float?
+  color                    Int?
+  length                   Float?
+  width                    Float?
+  height                   Float?
+  remaining_car_inspection Int?
+  repair_history           Int?
+  fuel                     Int?
+  handle                   Boolean?
+  passenger                Int?
+  number_doors             Int?
+  displacement             Float?
+  slide_door               Int?
+  total_payment            Int?
+  status                   Int?
+  has_certified            Boolean?
+  guaranteed               Boolean?
+  load_display             Boolean?
+  comment_person           Boolean?
+  created_at               DateTime  @default(now())
+  updated_at               DateTime  @updatedAt
+  deleted_at               DateTime?
+  image                    String?
+}
+
+model car_equipment_specifications {
+  car_id                     Int @id @default(autoincrement())
+  equipment_specification_id Int
+}
+
+model car_types {
+  car_id  Int @id @default(autoincrement())
+  type_id Int
+}
+
+model types {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model regions {
+  id         Int      @id @default(autoincrement())
+  name       String
+  parent_id  Int      @default(0)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model manufacturer {
+  id         Int      @id @default(autoincrement())
+  name       String
+  country    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model categories {
+  id           Int     @id @default(autoincrement())
+  name         String
+  is_popular   Boolean
+  parent       Int     @default(0)
+  manufacturer Int?
+}
+
+model mission {
+  id          Int    @id @default(autoincrement())
+  type        String
+  description String
+}
+
+model equipment_specifications {
+  id         Int    @id @default(autoincrement())
+  group      String
+  group_name String
+  name       String
+}
+
+model body_types {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model color {
+  id    Int     @id @default(autoincrement())
+  class String?
+  name  String?
+}
+
+model users {
+  id       Int    @id @default(autoincrement())
+  username String
+  password String
+}
